@@ -1,0 +1,55 @@
+.list_container{
+    width: 75vw;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    gap:2rem;
+    
+}
+.students{
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.students td, .students th {
+    border-bottom: 1px solid #ddd;
+    border-top: 1px solid #ddd;
+    padding: 1rem;
+    text-align: left;
+}
+
+.students th{
+    background-color: rgb(56, 183, 225);
+}
+
+.students tbody tr:nth-child(odd){background-color: #f2f2f2;}
+
+.students tbody tr:hover {background-color: #ddd;}
+
+.customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #04AA6D;
+  color: white;
+}
+
+.table_list{
+    height: 30rem;
+    overflow-x: scroll;
+}
+
+.table_list::-webkit-scrollbar {
+    display: none;
+  }
+
+.table_list input{
+    height: 0.9rem;
+    width: 0.9rem;
+}
+
+.table_list label{
+    font-size: 1.1rem;
+    display: inline-block;
+    margin-bottom: 1rem;
+}
