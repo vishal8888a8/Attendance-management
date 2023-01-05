@@ -123,7 +123,21 @@ var data=[
         lname:"test",
         roll:"test",
         checkin:"test",
+        checkout:"oooo"
+    },
+    {
+        fname:"test",
+        lname:"test",
+        roll:"test",
+        checkin:"test",
         checkout:"--"
+    },
+    {
+        fname:"test",
+        lname:"test",
+        roll:"test",
+        checkin:"test",
+        checkout:"-iidi-"
     },
     {
         fname:"test",
@@ -158,21 +172,7 @@ var data=[
         lname:"test",
         roll:"test",
         checkin:"test",
-        checkout:"--"
-    },
-    {
-        fname:"test",
-        lname:"test",
-        roll:"test",
-        checkin:"test",
-        checkout:"--"
-    },
-    {
-        fname:"test",
-        lname:"test",
-        roll:"test",
-        checkin:"test",
-        checkout:"--"
+        checkout:"oddkdkdk"
     }
 ]
 

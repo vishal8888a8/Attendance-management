@@ -3,15 +3,19 @@ import './css/Edit.css'
 
 export default function Edit(props) {
 
+    //state variable
+    let data = props.data;
+    let updateData = props.update;
     let [input,setInput] = useState({
         vfname:"",
         vlname:"",
         vroll:"",
         vcheckin:"",
-        vcheckout:""
+        vcheckout:"--"
     });
-    let data = props.data;
-    let updateData = props.update;
+    let [display,setDisplay] = useState("");
+    
+    //handler functions
     function handleInput(e)
     {
         let {name, value} = e.target;
@@ -21,36 +25,70 @@ export default function Edit(props) {
             [name]:value
         }})
     }
+
     function updateCheckin()
     {
-        setInput((prev)=>{
-            let today = new Date();
-            let time_data = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();    
+        setInput((prev)=>{    
             return {
                 ...prev,
-                ["vcheckin"]:time_data
+                ["vcheckin"]:getTime(),
             }
         })
     }
+
+    function getTime()
+    {
+        let today = new Date();
+        return today.getHours() + ":" + today.getMinutes();
+    }
+
     function handleSubmit(e)
     {  
         e.preventDefault();
-        console.log(input);
-        updateData((prev)=>{
-            let array = prev;
-            array.push({
-                fname:input.vfname,
-                lname:input.vlname,
-                roll:input.vroll,
-                checkin:input.vcheckin,
-                checkout:input.vcheckout
-            });
-            return array;
-        })
+        let operation = document.activeElement.name;
+        let index = data.findIndex((item)=>item.fname===input.vfname && item.lname===input.vlname && item.roll === input.vroll)
+        if ( index !== -1 && operation === 'entry' )
+            setDisplay('Student is already checked in!')
+        else if ( index === -1 && operation === 'exit' )
+            setDisplay('Student not found!')
+        else if ( operation === 'entry')
+        {
+            updateData((prev)=>{
+                let array = prev;
+                array.push({
+                    fname:input.vfname,
+                    lname:input.vlname,
+                    roll:input.vroll,
+                    checkin:input.vcheckin,
+                    checkout:input.vcheckout
+                });
+                return array;
+            })
+            setDisplay('Checked in!')
+        }
+        else
+        {
+            console.log(input);
+            // updateData((prev)=>{
+            //     let new_prev = prev.map((item)=>(item.fname===input.vfname && item.lname===input.vlname && item.roll === input.vroll ? {
+            //         ["fname"]:item.fname,
+            //         ["lname"]:item.lname,
+            //         ["roll"]:item.roll,
+            //         ["checkin"]:item.checkin,
+            //         ["checkout"]:"kmmm"
+            //     }:item))
+            //     return new_prev;
+            // })
+            setDisplay('Checked out!')
+        }
+        
         console.log(data);
+        setTimeout(()=>{
+            setDisplay("");
+        },2000)
         setTimeout(() => {
             props.updateEdit(!props.isEdit)
-        }, 1000);
+        }, 2500);
     }
 
   return (
@@ -61,21 +99,22 @@ export default function Edit(props) {
         }}>
             <div className='item'>
                 <label htmlFor="fname" >First Name: </label>
-                <input onChange={handleInput} type="text" id="fname" name="vfname" placeholder='Enter First Name...' />
+                <input onChange={handleInput} type="text" id="fname" name="vfname" placeholder='Enter First Name...' required/>
             </div>
             <div className='item'>
                 <label htmlFor="lname">Last Name: </label>
-                <input onChange={handleInput} type="text" id="lname" name="vlname" placeholder='Enter Last Name...' />
+                <input onChange={handleInput} type="text" id="lname" name="vlname" placeholder='Enter Last Name...' required/>
             </div>
             <div className='item'>
                 <label htmlFor="roll">Roll no: </label>
-                <input onChange={handleInput} type="text" id="roll" name="vroll" placeholder='Enter Roll No...' />
+                <input onChange={handleInput} type="text" id="roll" name="vroll" placeholder='Enter Roll No...' required/>
             </div>
             <div className='item item_submit'>
-                <button type='submit' value='entry' onClick={updateCheckin}>Mark entry</button>
-                <button type='submit' value='exit'>Mark exit</button>
+                <button type='submit' name='entry' onClick={updateCheckin}>Mark entry</button>
+                <button type='submit' name='exit'>Mark exit</button>
             </div>
         </form>
+        {display&&<div className='card'>{display}</div>}
     </div>
   )
 }

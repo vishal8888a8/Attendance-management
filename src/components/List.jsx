@@ -10,7 +10,7 @@ export default function List(props) {
         <button onClick={()=>{props.updateEdit(!props.isEdit)}}>Mark attendance</button>
       </div>
       <div className='table_list'>
-        <input onClick={()=>setPresentOnly(!presentOnly)} type="checkbox" id='checkbox' name='checkbox' />
+        <input onClick={()=>setPresentOnly((prev)=>!prev)} type="checkbox" id='checkbox' name='checkbox' />
         <label htmlFor="checkbox">only show students currently in  class</label>
         <table className="students">
           <thead>
@@ -24,13 +24,13 @@ export default function List(props) {
           </thead>
           <tbody>
             {props.data.map((item,idx)=>{
-              return <tr>
+              return (presentOnly===true&&item.checkout==='--'?null: <tr>
               <td>{idx+1}</td>
               <td>{item.fname+' '+item.lname}</td>
               <td>{item.roll}</td>
               <td>{item.checkin}</td>
               <td>{item.checkout}</td>
-            </tr>
+            </tr>)
             })}
           </tbody>
       </table>
