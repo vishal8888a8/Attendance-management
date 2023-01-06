@@ -16,3 +16,7 @@ It shows the list of all students who have marked their attendance along with ch
 
 A form page to take input from the student. One can either choose to mark entry ( checkin ) or mark exit ( checkout ). The time automatically saved by the app. A flash card is generated to showcase status of their entry after submitting the form.
 Mechanism has been provided in place to avoid a student checkin/checkout twice, checking out before checkin etc.  
+
+## Deployement
+
+Deployed link :-  [Click here!](https://vishal8888a8.github.io/Attendance-management/)
