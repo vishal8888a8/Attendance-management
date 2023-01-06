@@ -65,3 +65,14 @@ button:hover{
     padding: 0.5rem;
     color: white;
 }
+
+.form_header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.form_header>button{
+    height: 2.5rem;
+    width: 7rem;
+}

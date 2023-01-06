@@ -54,42 +54,48 @@ export default function Edit(props) {
             setDisplay('Student not found!')
         else if ( index !== -1 && operation === 'exit' && data[index].checkout !== 'NA' )
             setDisplay('Student already checked out!')
-        else if ( operation === 'entry')
-        {
-            updateData((prev)=>{
-                let array = prev;
-                array.push({
-                    fname:input.vfname,
-                    lname:input.vlname,
-                    roll:input.vroll,
-                    checkin:input.vcheckin,
-                    checkout:input.vcheckout
-                });
-                return array;
-            })
-            setDisplay('Checked in!')
-        }
         else
         {
-            updateData((prev)=>{
-                let new_prev = prev;
-                new_prev[index].checkout=getTime();
-                return new_prev;
-            })
-            setDisplay('Checked out!')
+            if ( operation === 'entry')
+            {
+                updateData((prev)=>{
+                    let array = prev;
+                    array.push({
+                        fname:input.vfname,
+                        lname:input.vlname,
+                        roll:input.vroll,
+                        checkin:input.vcheckin,
+                        checkout:input.vcheckout
+                    });
+                    return array;
+                })
+                setDisplay('Checked in!')
+            }
+            else
+            {
+                updateData((prev)=>{
+                    let new_prev = prev;
+                    new_prev[index].checkout=getTime();
+                    return new_prev;
+                })
+                setDisplay('Checked out!')
+            }
+            setTimeout(() => {
+                props.updateEdit(false)
+            }, 2200);
         }
         console.log(data);
         setTimeout(()=>{
             setDisplay("");
         },2000)
-        setTimeout(() => {
-            props.updateEdit(!props.isEdit)
-        }, 2500);
     }
 
   return (
     <div className='edit_container'>
-        <h2>Manage Student Attendance</h2>
+        <div className='form_header'>
+            <h2>Manage Student Attendance</h2>
+            <button onClick={()=>props.updateEdit(false)}>Go home</button>
+        </div>
         <form onSubmit={(e)=>{
             handleSubmit(e);
         }}>
