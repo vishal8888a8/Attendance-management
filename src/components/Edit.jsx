@@ -68,20 +68,13 @@ export default function Edit(props) {
         }
         else
         {
-            console.log(input);
-            // updateData((prev)=>{
-            //     let new_prev = prev.map((item)=>(item.fname===input.vfname && item.lname===input.vlname && item.roll === input.vroll ? {
-            //         ["fname"]:item.fname,
-            //         ["lname"]:item.lname,
-            //         ["roll"]:item.roll,
-            //         ["checkin"]:item.checkin,
-            //         ["checkout"]:"kmmm"
-            //     }:item))
-            //     return new_prev;
-            // })
+            updateData((prev)=>{
+                let new_prev = prev;
+                new_prev[index].checkout=getTime();
+                return new_prev;
+            })
             setDisplay('Checked out!')
         }
-        
         console.log(data);
         setTimeout(()=>{
             setDisplay("");

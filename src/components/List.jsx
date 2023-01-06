@@ -24,7 +24,7 @@ export default function List(props) {
           </thead>
           <tbody>
             {props.data.map((item,idx)=>{
-              return (presentOnly===true&&item.checkout==='--'?null: <tr>
+              return (presentOnly===true&&item.checkout!=='NA'?null: <tr>
               <td>{idx+1}</td>
               <td>{item.fname+' '+item.lname}</td>
               <td>{item.roll}</td>
