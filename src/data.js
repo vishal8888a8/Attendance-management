@@ -105,13 +105,6 @@ var data=[
         roll:"55",
         checkin:"8:45",
         checkout:"15:45"
-    },
-    {
-        fname:"test",
-        lname:"test",
-        roll:"test",
-        checkin:"test",
-        checkout:"--"
     }
 ]
 

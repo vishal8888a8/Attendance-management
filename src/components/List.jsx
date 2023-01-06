@@ -1,14 +1,20 @@
 import React,{useState} from 'react'
 import './css/List.css'
 
+//this component is responsible for rendering the table 
+
 export default function List(props) {
-  let [presentOnly,setPresentOnly] = useState(false);
+
+  let [presentOnly,setPresentOnly] = useState(false);   // to only show students who are present
+
   return (
     <div className='list_container'>
+
       <div className='header'>
         <h2>Student Attendance Management</h2>
         <button onClick={()=>{props.updateEdit(!props.isEdit)}}>Mark attendance</button>
       </div>
+
       <div className='table_list'>
         <input onClick={()=>setPresentOnly((prev)=>!prev)} type="checkbox" id='checkbox' name='checkbox' />
         <label htmlFor="checkbox">only show students currently in  class</label>
@@ -33,8 +39,9 @@ export default function List(props) {
             </tr>)
             })}
           </tbody>
-      </table>
+        </table>
       </div>
+
     </div>
   )
 }

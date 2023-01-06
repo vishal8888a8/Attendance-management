@@ -11,7 +11,7 @@ export default function Edit(props) {
         vlname:"",
         vroll:"",
         vcheckin:"",
-        vcheckout:"--"
+        vcheckout:"NA"
     });
     let [display,setDisplay] = useState("");
     
@@ -31,6 +31,7 @@ export default function Edit(props) {
         setInput((prev)=>{    
             return {
                 ...prev,
+                // eslint-disable-next-line
                 ["vcheckin"]:getTime(),
             }
         })
@@ -51,6 +52,8 @@ export default function Edit(props) {
             setDisplay('Student is already checked in!')
         else if ( index === -1 && operation === 'exit' )
             setDisplay('Student not found!')
+        else if ( index !== -1 && operation === 'exit' && data[index].checkout !== 'NA' )
+            setDisplay('Student already checked out!')
         else if ( operation === 'entry')
         {
             updateData((prev)=>{
